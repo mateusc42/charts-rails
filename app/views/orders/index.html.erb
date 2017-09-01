@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Mateus Cardoso</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/assets/stylesheetss/application.css" />
+	</head>
+	<body id="top">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="#" class="image avatar"><img src="/assets/images/avatar.jpg" alt="" /></a>
+					<h1><strong>Dashboard</strong>, simples<br />
+					usando ruby on rails<br />
+					crafted by <a href="https://www.facebook.com/mateusc42">Mateus Cardoso</a>.</h1>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>Orders</h2>
+						</header>
+						<p>Usando o Morris.js</p>
+						
+						<%= content_tag :div, "", id: "orders_chart", data: {orders: Order.chart_data} %>
+						
+						<table id="orders">
+              <tr>
+                <th>Number</th>
+                <th>Purchased</th>
+                <th>Shipping</th>
+                <th>Total Price</th>
+              </tr>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.id %></td>
+                  <td><%= order.purchased_at.strftime("%B %e, %Y %H:%M") %></td>
+                  <td><%= order.shipping ? "Yes" : "No" %></td>
+                  <td><%= number_to_currency order.price %></td>
+                </tr>
+              <% end %>
+            </table>
+            <%= will_paginate @orders %>
+            
+						<ul class="actions">
+							<li><a href="#" class="button">outros</a></li>
+						</ul>
+					</section>
+
+			</div>
+			
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; 2017 MC</li><li>Design: <a href="https://www.facebook.com/mateusc42">Mateus Cardoso</a></li>
+					</ul>
+				</div>
+			</footer>
+
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Mateus Cardoso</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/assets/stylesheetss/application.css" />
+	</head>
+	<body id="top">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="#" class="image avatar"><img src="/assets/images/avatar.jpg" alt="" /></a>
+					<h1><strong>Dashboard</strong>, simples<br />
+					usando ruby on rails<br />
+					crafted by <a href="https://www.facebook.com/mateusc42">Mateus Cardoso</a>.</h1>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>Graficos</h2>
+						</header>
+						<p>chartkick</p>
+                      
+                        <h3>Visits By Day</h3>
+                        <%= line_chart @visits.group_by_day(:visited_at, format: "%B %d, %Y").count, discrete: true %>
+                        
+						<ul class="actions">
+							<li><a href="#" class="button">outros</a></li>
+						</ul>
+					</section>
+
+				<!-- Two -->
+					<section id="two">
+						<h2>Outros</h2>
+						<div class="row">
+							<article class="6u 12u$(xsmall) work-item">
+								<h3>Visits By Country Per Day</h3>
+                                <%= line_chart  Visit.pluck("country").uniq.map { |c| { name: c, data: @visits.where(country: c).group_by_day(:visited_at, format: "%B %d, %Y").count }  }, discrete: true %>
+							</article>
+							<article class="6u$ 12u$(xsmall) work-item">
+								<h3>Total Visits by Country</h3>
+                                <%= pie_chart @visits.group(:country).count %>
+							</article>
+							<article class="6u 12u$(xsmall) work-item">
+								<h3>Visits By Day</h3>
+                                <%= geo_chart @visits.group(:country).count %>
+							</article>
+							<article class="6u$ 12u$(xsmall) work-item">
+								<h3>Total Load Time By Day</h3>
+                                <%= area_chart @visits.group_by_day(:visited_at).maximum(:load_time) %>
+							</article>
+						</div>
+						<ul class="actions">
+							<li><a href="#" class="button">outros</a></li>
+						</ul>
+					</section>
+
+                    <!-- One -->
+					<section id="one">
+                      
+                        <h3>Total Visits Per Country</h3>
+                        <%= column_chart @visits.group(:country).count %>
+                        
+						<ul class="actions">
+							<li><a href="#" class="button">outros</a></li>
+						</ul>
+					</section>
+					
+					<!-- One -->
+					<section id="one">
+                      
+                        <h3>Total Visits Per Country</h3>
+                        <%= bar_chart @visits.group(:country).count %>
+                        
+                        <%= line_chart @visits.group(:country).group_by_week(:created_at).count %>
+                        
+						<ul class="actions">
+							<li><a href="#" class="button">outros</a></li>
+						</ul>
+					</section>
+
+			</div>
+			
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; 2017 MC</li><li>Design: <a href="https://www.facebook.com/mateusc42">Mateus Cardoso</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
